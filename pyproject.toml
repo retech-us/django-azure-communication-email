@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "django-ace"
+version = "0.1.0"
+description = "A Django email backend for Azure Communication Email service."
+authors = ["Dmitrii Azarenko <dmitrii@retechlabs.com>"]
+license = "Apache-2.0"
+readme = "README.md"
+packages = [{include = "django_ace"}]
+
+[tool.poetry.dependencies]
+python = "~3.11"
+Django = "~4.2"
+azure-identity = "~1.13"
+azure-communication-email = "~1.0"
+
+[tool.poetry.group.dev.dependencies]
+isort = "^5.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+py_version = 311
+default_section = "THIRDPARTY"
+known_first_party = ["django_ace"]
+known_django = "django"
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "DJANGO", "FIRSTPARTY", "LOCALFOLDER"]
+combine_as_imports = true
+sort_reexports = true
+multi_line_output = 5
+lines_after_imports = 2
+combine_star = true
+include_trailing_comma = true
+remove_redundant_aliases = true
+skip_gitignore = true
