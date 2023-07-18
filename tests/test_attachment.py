@@ -22,7 +22,7 @@ class TestGetConverter(TestCase):
     def test_unknown_attachment_type(self):
         att_file = object()
         with self.assertRaises(TypeError):
-            attachment.get_converter(att_file)
+            attachment.get_converter(att_file)  # type: ignore
 
 
 class TestTupleBaseConverter(TestCase):

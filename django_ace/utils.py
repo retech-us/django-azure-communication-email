@@ -1,4 +1,5 @@
 import re
+from typing import Tuple
 
 from django.core.mail import EmailMessage, EmailMultiAlternatives
 
@@ -6,7 +7,7 @@ from django.core.mail import EmailMessage, EmailMultiAlternatives
 _RE_SENDER_NAME = re.compile(r'^([^<>]+)\s<([^<>]+)>$')
 
 
-def get_name_and_email(address) -> tuple[str, str]:
+def get_name_and_email(address) -> Tuple[str, str]:
     """Returns the name and email from addresses like
     "Contact <contact@company.com>".
     """

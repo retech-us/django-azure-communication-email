@@ -2,9 +2,10 @@ import base64
 import re
 from email.charset import Charset
 from email.mime.base import MIMEBase
+from typing import Tuple, Union
 
 
-Attachment = MIMEBase | tuple[str, str | bytes, str]
+Attachment = Union[MIMEBase, Tuple[str, Union[str, bytes], str]]
 
 
 class BaseConverter:

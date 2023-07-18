@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Iterable
+from typing import Any, Dict, Iterable, List, Optional
 
 from azure.communication.email import EmailClient
 
@@ -19,12 +19,12 @@ class ACEmailBackend(BaseEmailBackend):
     def __init__(
         self,
         *,
-        connection_string: str | None = None,
-        tenant_id: str | None = None,
-        client_id: str | None = None,
-        client_secret: str | None = None,
-        endpoint: str | None = None,
-        key_credential: str | None = None,
+        connection_string: Optional[str] = None,
+        tenant_id: Optional[str] = None,
+        client_id: Optional[str] = None,
+        client_secret: Optional[str] = None,
+        endpoint: Optional[str] = None,
+        key_credential: Optional[str] = None,
         fail_silently=False,
         **kwargs,
     ) -> None:
@@ -102,7 +102,7 @@ class ACEmailBackend(BaseEmailBackend):
         self.close()
         return sent
 
-    def convert_message(self, message: EmailMessage) -> dict[str, Any]:
+    def convert_message(self, message: EmailMessage) -> Dict[str, Any]:
         """Converts the EmailMessage object to dictionary."""
         msg = {
             'senderAddress': utils.get_name_and_email(message.from_email)[1],
@@ -134,14 +134,14 @@ class ACEmailBackend(BaseEmailBackend):
         return msg
 
     @staticmethod
-    def _build_recipients(recipients: Iterable[str]) -> list[dict[str, str]]:
+    def _build_recipients(recipients: Iterable[str]) -> List[Dict[str, str]]:
         return [
             {'displayName': name, 'address': email}
             for name, email in map(utils.get_name_and_email, recipients)
         ]
 
     @staticmethod
-    def _build_attachment(file: attachment.Attachment) -> dict[str, str]:
+    def _build_attachment(file: attachment.Attachment) -> Dict[str, str]:
         converter = attachment.get_converter(file)
         return {
             'name': converter.get_filename(),
