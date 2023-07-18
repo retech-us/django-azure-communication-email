@@ -10,7 +10,7 @@ from django.core.mail.backends.base import BaseEmailBackend
 from . import attachment, settings, utils
 
 
-logger = logging.getLogger('django_ace')
+logger = logging.getLogger('django_azure_communication_email')
 
 
 class ACEmailBackend(BaseEmailBackend):

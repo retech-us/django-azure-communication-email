@@ -15,7 +15,7 @@ Run the following on your system:
 
 Then, add these settings to your Django `settings.py`:
 
-    EMAIL_BACKEND = 'django_ace.EmailBackend'
+    EMAIL_BACKEND = 'django_azure_communication_email.EmailBackend'
 
     AZURE_COMMUNICATION_CONNECTION_STRING = '...'
     # OR
@@ -25,7 +25,7 @@ Then, add these settings to your Django `settings.py`:
 If you prefer to use Azure Active Directory authentication, you can use the
 following `settings.py` instead:
 
-    EMAIL_BACKEND = 'django_ace.EmailBackend'
+    EMAIL_BACKEND = 'django_azure_communication_email.EmailBackend'
     
     AZURE_COMMUNICATION_ENDPOINT = '...'
     

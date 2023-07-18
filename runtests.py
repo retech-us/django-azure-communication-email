@@ -4,9 +4,7 @@ from django.core.management import call_command
 
 
 settings.configure(
-    INSTALLED_APPS=[
-        'django_ace',
-    ],
+    INSTALLED_APPS=[],
     DATABASES={
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

@@ -3,7 +3,7 @@ import base64
 from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.test import TestCase
 
-from django_ace import EmailBackend
+from django_azure_communication_email import EmailBackend
 
 
 class EmailClientStub:
@@ -23,7 +23,7 @@ class EmailClientStub:
 
 
 class TestEmailBackend(TestCase):
-    """django_ace.backend.ACEmailBackend()"""
+    """backend.ACEmailBackend()"""
 
     def setUp(self) -> None:
         self.backend = EmailBackend()

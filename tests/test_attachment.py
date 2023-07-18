@@ -3,7 +3,7 @@ from email.mime.nonmultipart import MIMENonMultipart
 
 from django.test import TestCase
 
-from django_ace import attachment
+from django_azure_communication_email import attachment
 
 
 class TestGetConverter(TestCase):
