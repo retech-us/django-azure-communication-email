@@ -27,6 +27,10 @@ classifiers = [
     'Programming Language :: Python :: 3.10',
     'Programming Language :: Python :: 3.11',
 ]
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/rebotics/django-azure-communication-email/issues"
+"Company Website" = "https://retechlabs.com"
+
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.12"
