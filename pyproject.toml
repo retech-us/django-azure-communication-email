@@ -3,18 +3,40 @@ name = "django-ace"
 version = "0.1.0"
 description = "A Django email backend for Azure Communication Email service."
 authors = ["Dmitrii Azarenko <dmitrii@retechlabs.com>"]
+maintainers = []
 license = "Apache-2.0"
 readme = "README.md"
+repository = "https://github.com/rebotics/django-ace"
 packages = [{include = "django_ace"}]
+keywords = ["django", "email", "azure"]
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: Apache Software License',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Topic :: Software Development :: Libraries :: Python Modules',
+    'Framework :: Django',
+    'Framework :: Django :: 2.2',
+    'Framework :: Django :: 3.2',
+    'Framework :: Django :: 4.0',
+    'Framework :: Django :: 4.1',
+    'Framework :: Django :: 4.2',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+]
 
 [tool.poetry.dependencies]
-python = "~3.11"
-Django = "~4.2"
+python = ">=3.8,<3.12"
+Django = ">=2.2,<4.3"
 azure-identity = "~1.13"
 azure-communication-email = "~1.0"
 
 [tool.poetry.group.dev.dependencies]
 isort = "^5.1.0"
+tox = "^4.6.4"
 
 [build-system]
 requires = ["poetry-core"]
