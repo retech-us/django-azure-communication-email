@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-azure-communication-email"
-version = "1.0.0"
+version = "1.0.1"
 description = "A Django email backend for Azure Communication Email service."
 authors = ["Dmitrii Azarenko <dmitrii@retechlabs.com>"]
 maintainers = []
