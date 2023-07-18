@@ -1,6 +1,6 @@
 # Django Azure Communication Email
 
-[![Build Status](https://github.com/rebotics/django-azure-communication-email/actions/workflows/ci.yml/badge.svg)](https://github.com/rebotics/django-azure-communication-email/actions/workflows/ci.yml/badge)
+[![Unit tests](https://github.com/rebotics/django-azure-communication-email/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/rebotics/django-azure-communication-email/actions/workflows/ci.yml)
 [![PyPI version](https://badge.fury.io/py/django-azure-communication-email.svg)](https://badge.fury.io/py/django-azure-communication-email)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://img.shields.io/badge/python-3.8+-blue)
 [![Django](https://img.shields.io/badge/django-2.2+-blue.svg)](https://img.shields.io/badge/django-2.2+-blue)
