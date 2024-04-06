@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "django-azure-communication-email"
-version = "1.0.1"
+version = "1.1.0"
 description = "A Django email backend for Azure Communication Email service."
-authors = ["Dmitrii Azarenko <dmitrii@retechlabs.com>"]
+authors = ["Dmitrii Azarenko <dmitrii.azarenko@symphonyai.com>"]
 maintainers = []
 license = "Apache-2.0"
 readme = "README.md"
-repository = "https://github.com/rebotics/django-azure-communication-email"
+repository = "https://github.com/retech-us/django-azure-communication-email"
 packages = [{include = "django_azure_communication_email"}]
 keywords = ["django", "email", "azure"]
 classifiers = [
@@ -22,32 +22,34 @@ classifiers = [
     'Framework :: Django :: 4.0',
     'Framework :: Django :: 4.1',
     'Framework :: Django :: 4.2',
+    'Framework :: Django :: 5.0',
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
     'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
 ]
 [tool.poetry.urls]
-"Bug Tracker" = "https://github.com/rebotics/django-azure-communication-email/issues"
+"Bug Tracker" = "https://github.com/retech-us/django-azure-communication-email/issues"
 "Company Website" = "https://retechlabs.com"
 
 
 [tool.poetry.dependencies]
-python = ">=3.8,<3.12"
-Django = ">=2.2,<4.3"
-azure-identity = "~1.13"
+python = ">=3.8,<3.13"
+Django = ">=2.2,<5.1"
+azure-identity = "~1.15"
 azure-communication-email = "~1.0"
 
 [tool.poetry.group.dev.dependencies]
-isort = "^5.1.0"
-tox = "^4.6.4"
+isort = "^5.13"
+tox = "^4.14"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.isort]
-py_version = 311
+py_version = 312
 default_section = "THIRDPARTY"
 known_first_party = ["django_azure_communication_email"]
 known_django = "django"
