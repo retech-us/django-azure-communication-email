@@ -12,8 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11"]
-        django-version: [22, 32, 40, 41, 42]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        django-version: [22, 32, 40, 41, 42, 50]
+        exclude:
+          - python-version: "3.12"
+            django-version: 22
+          - python-version: "3.8"
+            django-version: 50
+          - python-version: "3.9"
+            django-version: 50
 
     steps:
       - uses: actions/checkout@v3
