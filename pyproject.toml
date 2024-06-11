@@ -37,7 +37,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = ">=3.8,<3.13"
 Django = ">=2.2,<5.1"
-azure-identity = "~1.15"
+azure-identity = ">=1.15,<1.17"
 azure-communication-email = "~1.0"
 
 [tool.poetry.group.dev.dependencies]
