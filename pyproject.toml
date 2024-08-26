@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-azure-communication-email"
-version = "1.1.0"
+version = "1.2.0"
 description = "A Django email backend for Azure Communication Email service."
 authors = ["Dmitrii Azarenko <dmitrii.azarenko@symphonyai.com>"]
 maintainers = []
@@ -23,6 +23,7 @@ classifiers = [
     'Framework :: Django :: 4.1',
     'Framework :: Django :: 4.2',
     'Framework :: Django :: 5.0',
+    'Framework :: Django :: 5.1',
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
@@ -36,8 +37,8 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.13"
-Django = ">=2.2,<5.1"
-azure-identity = ">=1.15,<1.17"
+Django = ">=2.2,<5.2"
+azure-identity = ">=1.15,<1.18"
 azure-communication-email = "~1.0"
 
 [tool.poetry.group.dev.dependencies]
