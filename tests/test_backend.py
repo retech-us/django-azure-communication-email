@@ -142,7 +142,7 @@ class TestEmailBackend(TestCase):
             conv_message['attachments'][0],
             {
                 'name': 'file.txt',
-                'attachmentType': 'text/plain',
+                'contentType': 'text/plain',
                 'contentInBase64': base64.b64encode(b'content').decode(),
             },
         )
