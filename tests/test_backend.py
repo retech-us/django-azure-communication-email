@@ -3,7 +3,7 @@ import base64
 from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.test import TestCase
 
-from django_azure_communication_email import EmailBackend
+from django_better_azure_communication_email import EmailBackend
 
 
 class EmailClientStub:

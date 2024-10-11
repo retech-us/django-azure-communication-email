@@ -1,7 +1,7 @@
 from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.test import TestCase
 
-from django_azure_communication_email import utils
+from django_better_azure_communication_email import utils
 
 
 class TestGetNameAndEmail(TestCase):

@@ -1,9 +1,5 @@
-# Django Azure Communication Email
-
-[![Unit tests](https://github.com/rebotics/django-azure-communication-email/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/rebotics/django-azure-communication-email/actions/workflows/ci.yml)
-[![PyPI version](https://badge.fury.io/py/django-azure-communication-email.svg)](https://badge.fury.io/py/django-azure-communication-email)
-[![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://img.shields.io/badge/python-3.8+-blue)
-[![Django](https://img.shields.io/badge/django-2.2+-blue.svg)](https://img.shields.io/badge/django-2.2+-blue)
+# Django Better Azure Communication Email
+This is a fork from: https://github.com/retech-us/django-azure-communication-email
 
 A Django email backend for Azure Communication Email service.
 
@@ -11,11 +7,11 @@ A Django email backend for Azure Communication Email service.
 ## Installation
 Run the following on your system:
 
-    pip install django-azure-communication-email
+    pip install django-better-azure-communication-email
 
 Then, add these settings to your Django `settings.py`:
 
-    EMAIL_BACKEND = 'django_azure_communication_email.EmailBackend'
+    EMAIL_BACKEND = 'django_better_azure_communication_email.EmailBackend'
 
     AZURE_COMMUNICATION_CONNECTION_STRING = '...'
     # OR
@@ -25,7 +21,7 @@ Then, add these settings to your Django `settings.py`:
 If you prefer to use Azure Active Directory authentication, you can use the
 following `settings.py` instead:
 
-    EMAIL_BACKEND = 'django_azure_communication_email.EmailBackend'
+    EMAIL_BACKEND = 'django_better_azure_communication_email.EmailBackend'
     
     AZURE_COMMUNICATION_ENDPOINT = '...'
     
@@ -36,11 +32,8 @@ Now, when you use `django.core.mail.send_mail`, Azure Communication Email
 service will send the messages by default.
 
 ## Running Tests
-To run the tests::
+Tests is being converted to Tox atm, so no running tests.
 
-    python runtests.py
-
-If you want to debug the tests, just add this file as a python script to your IDE run configuration.
 
 ## Creating a Release
 
