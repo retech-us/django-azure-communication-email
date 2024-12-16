@@ -7,8 +7,11 @@ from typing import Tuple, Union
 
 Attachment = Union[MIMEBase, Tuple[str, Union[str, bytes], str]]
 
-
 class BaseConverter:
+    """
+    Base Converter meant to be used as a parent class.
+    Defines the default functions to ensure that if a new class doesn't have the required functions, it raises errors.
+    """
 
     def __init__(self, obj: Attachment):
         self.obj = obj
@@ -17,6 +20,9 @@ class BaseConverter:
         raise NotImplementedError
 
     def get_filetype(self) -> str:
+        raise NotImplementedError
+
+    def get_content_type(self) -> str:
         raise NotImplementedError
 
     def get_content(self) -> str:
@@ -45,6 +51,9 @@ class MIMEBaseConverter(BaseConverter):
 
         return base64.b64encode(payload.encode(self.get_charset())).decode()
 
+    def get_content_type(self) -> str:
+        return self.obj.get_content_type()
+
     def get_charset(self) -> str:
         charset = self.obj.get_charset()
 
@@ -65,6 +74,9 @@ class TupleBaseConverter(BaseConverter):
         return self.obj[0]
 
     def get_filetype(self) -> str:
+        return self.obj[2]
+
+    def get_content_type(self) -> str:
         return self.obj[2]
 
     def get_content(self) -> str:

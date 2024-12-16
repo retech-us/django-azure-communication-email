@@ -145,6 +145,6 @@ class ACEmailBackend(BaseEmailBackend):
         converter = attachment.get_converter(file)
         return {
             'name': converter.get_filename(),
-            'contentType': converter.get_filetype(),
+            'contentType': converter.get_content_type(),
             'contentInBase64': converter.get_content(),
         }
