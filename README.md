@@ -35,6 +35,21 @@ following `settings.py` instead:
 Now, when you use `django.core.mail.send_mail`, Azure Communication Email
 service will send the messages by default.
 
+## Disabling Retry Policy
+
+By default, the Azure SDK will retry failed requests.
+This can cause blocking issues when rate limits are hit, as workers may wait
+for extended periods (an hour or more) trying to send emails.
+
+To disable retries and fail immediately when rate limits are reached, add this
+setting:
+
+    AZURE_COMMUNICATION_RETRY_POLICY = 'no_retries'
+
+This will cause the EmailClient to raise an `HttpResponseError` immediately if
+the rate limit has been hit, preventing your application from becoming
+unresponsive due to blocked workers.
+
 ## Running Tests
 To run the tests::
 

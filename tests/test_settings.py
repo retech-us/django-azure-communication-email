@@ -60,3 +60,8 @@ class TestSettings(TestCase):
     def test_tracking_disabled_2(self):
         from django_azure_communication_email import settings
         self.assertEqual(settings.TRACKING_DISABLED, False)
+
+    @override_settings(AZURE_COMMUNICATION_RETRY_POLICY='no_retries')
+    def test_retry_policy(self):
+        from django_azure_communication_email import settings
+        self.assertEqual(settings.RETRY_POLICY, 'no_retries')
