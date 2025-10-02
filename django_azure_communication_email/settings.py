@@ -13,3 +13,7 @@ KEY_CREDENTIAL = getattr(settings, 'AZURE_KEY_CREDENTIAL', None)
 TRACKING_DISABLED = getattr(
     settings, 'AZURE_COMMUNICATION_TRACKING_DISABLED', False,
 )
+
+RETRY_POLICY = getattr(
+    settings, 'AZURE_COMMUNICATION_RETRY_POLICY', None,
+)

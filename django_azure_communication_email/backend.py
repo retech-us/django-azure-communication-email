@@ -2,6 +2,7 @@ import logging
 from typing import Any, Dict, Iterable, List, Optional
 
 from azure.communication.email import EmailClient
+from azure.core.pipeline.policies import RetryPolicy
 
 from django.core.exceptions import ImproperlyConfigured
 from django.core.mail import EmailMessage
@@ -25,6 +26,7 @@ class ACEmailBackend(BaseEmailBackend):
         client_secret: Optional[str] = None,
         endpoint: Optional[str] = None,
         key_credential: Optional[str] = None,
+        retry_policy: Optional[str] = None,
         fail_silently=False,
         **kwargs,
     ) -> None:
@@ -37,6 +39,7 @@ class ACEmailBackend(BaseEmailBackend):
         self._client_secret = client_secret or settings.CLIENT_SECRET
         self._endpoint = endpoint or settings.ENDPOINT
         self._key_credential = key_credential or settings.KEY_CREDENTIAL
+        self._retry_policy = retry_policy or settings.RETRY_POLICY
 
         self._client: EmailClient | None = None
 
@@ -45,19 +48,29 @@ class ACEmailBackend(BaseEmailBackend):
             return
 
         try:
+            # Configure retry policy if specified
+            retry_policy = None
+            if self._retry_policy == 'no_retries':
+                retry_policy = RetryPolicy.no_retries()
+            
             if conn_str := self._connection_string:
-                self._client = EmailClient.from_connection_string(conn_str)
+                self._client = EmailClient.from_connection_string(
+                    conn_str,
+                    retry_policy=retry_policy
+                )
             elif self._tenant_id and self._endpoint:
                 from azure.identity import DefaultAzureCredential
                 self._client = EmailClient(
                     self._endpoint,
                     DefaultAzureCredential(),  # type: ignore
+                    retry_policy=retry_policy
                 )
             elif self._key_credential and self._endpoint:
                 from azure.core.credentials import AzureKeyCredential
                 self._client = EmailClient(
                     self._endpoint,
                     AzureKeyCredential(self._key_credential),
+                    retry_policy=retry_policy
                 )
             else:
                 raise ImproperlyConfigured(
