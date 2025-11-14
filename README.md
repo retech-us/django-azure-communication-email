@@ -35,20 +35,38 @@ following `settings.py` instead:
 Now, when you use `django.core.mail.send_mail`, Azure Communication Email
 service will send the messages by default.
 
-## Disabling Retry Policy
+## Configuring Retry Policy
 
-By default, the Azure SDK will retry failed requests.
-This can cause blocking issues when rate limits are hit, as workers may wait
-for extended periods (an hour or more) trying to send emails.
+By default, the Azure SDK will retry failed requests with exponential backoff
+(up to 10 total retries). This can cause blocking issues when rate limits are
+hit, as workers may wait for extended periods (an hour or more) trying to
+send emails.
 
-To disable retries and fail immediately when rate limits are reached, add this
-setting:
+You can customize the retry behavior by configuring a `RetryPolicy` in your
+`settings.py`:
 
-    AZURE_COMMUNICATION_RETRY_POLICY = 'no_retries'
+```python
+from azure.core.pipeline.policies import RetryPolicy
 
-This will cause the EmailClient to raise an `HttpResponseError` immediately if
-the rate limit has been hit, preventing your application from becoming
-unresponsive due to blocked workers.
+# Example 1: Disable retries completely (fail immediately)
+AZURE_COMMUNICATION_RETRY_POLICY = RetryPolicy.no_retries()
+
+# Example 2: Reduce retries for faster failure (3 retries instead of 10)
+AZURE_COMMUNICATION_RETRY_POLICY = RetryPolicy(
+    retry_total=3,
+    retry_backoff_factor=0.4,  # Shorter backoff time
+)
+
+# Example 3: Increase retries for better reliability
+AZURE_COMMUNICATION_RETRY_POLICY = RetryPolicy(
+    retry_total=15,
+    retry_backoff_factor=1.0,  # Longer backoff time
+    retry_backoff_max=180,     # Max 3 minutes between retries
+)
+```
+
+For detailed `RetryPolicy` configuration options, see the
+[Azure SDK documentation](https://learn.microsoft.com/en-us/python/api/azure-core/azure.core.pipeline.policies.retrypolicy?view=azure-python).
 
 ## Running Tests
 To run the tests::

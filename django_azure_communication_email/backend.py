@@ -26,7 +26,7 @@ class ACEmailBackend(BaseEmailBackend):
         client_secret: Optional[str] = None,
         endpoint: Optional[str] = None,
         key_credential: Optional[str] = None,
-        retry_policy: Optional[str] = None,
+        retry_policy: Optional[RetryPolicy] = None,
         fail_silently=False,
         **kwargs,
     ) -> None:
@@ -48,29 +48,24 @@ class ACEmailBackend(BaseEmailBackend):
             return
 
         try:
-            # Configure retry policy if specified
-            retry_policy = None
-            if self._retry_policy == 'no_retries':
-                retry_policy = RetryPolicy.no_retries()
-            
             if conn_str := self._connection_string:
                 self._client = EmailClient.from_connection_string(
                     conn_str,
-                    retry_policy=retry_policy
+                    retry_policy=self._retry_policy
                 )
             elif self._tenant_id and self._endpoint:
                 from azure.identity import DefaultAzureCredential
                 self._client = EmailClient(
                     self._endpoint,
                     DefaultAzureCredential(),  # type: ignore
-                    retry_policy=retry_policy
+                    retry_policy=self._retry_policy
                 )
             elif self._key_credential and self._endpoint:
                 from azure.core.credentials import AzureKeyCredential
                 self._client = EmailClient(
                     self._endpoint,
                     AzureKeyCredential(self._key_credential),
-                    retry_policy=retry_policy
+                    retry_policy=self._retry_policy
                 )
             else:
                 raise ImproperlyConfigured(

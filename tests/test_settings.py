@@ -1,5 +1,6 @@
 import sys
 
+from azure.core.pipeline.policies import RetryPolicy
 from django.test import TestCase, override_settings
 
 
@@ -61,7 +62,21 @@ class TestSettings(TestCase):
         from django_azure_communication_email import settings
         self.assertEqual(settings.TRACKING_DISABLED, False)
 
-    @override_settings(AZURE_COMMUNICATION_RETRY_POLICY='no_retries')
-    def test_retry_policy(self):
+    def test_retry_policy_no_retries(self):
+        retry_policy = RetryPolicy.no_retries()
+        with override_settings(AZURE_COMMUNICATION_RETRY_POLICY=retry_policy):
+            from django_azure_communication_email import settings
+            self.assertEqual(settings.RETRY_POLICY, retry_policy)
+
+    def test_retry_policy_custom(self):
+        retry_policy = RetryPolicy(retry_total=5, retry_backoff_factor=0.5)
+        with override_settings(AZURE_COMMUNICATION_RETRY_POLICY=retry_policy):
+            from django_azure_communication_email import settings
+            self.assertEqual(settings.RETRY_POLICY, retry_policy)
+            self.assertEqual(settings.RETRY_POLICY.total_retries, 5)
+            self.assertEqual(settings.RETRY_POLICY.backoff_factor, 0.5)
+
+    def test_retry_policy_none(self):
         from django_azure_communication_email import settings
-        self.assertEqual(settings.RETRY_POLICY, 'no_retries')
+        # When not set, should default to None (uses SDK default)
+        self.assertIsNone(settings.RETRY_POLICY)
