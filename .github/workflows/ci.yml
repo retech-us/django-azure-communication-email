@@ -12,9 +12,23 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
         django-version: [22, 32, 40, 41, 42, 50, 51, 52]
         exclude:
+          - python-version: "3.14"
+            django-version: 22
+          - python-version: "3.14"
+            django-version: 32
+          - python-version: "3.14"
+            django-version: 40
+          - python-version: "3.14"
+            django-version: 41
+          - python-version: "3.14"
+            django-version: 42
+          - python-version: "3.14"
+            django-version: 50
+          - python-version: "3.14"
+            django-version: 51
           - python-version: "3.13"
             django-version: 22
           - python-version: "3.13"
