@@ -25,6 +25,7 @@ classifiers = [
     'Framework :: Django :: 5.0',
     'Framework :: Django :: 5.1',
     'Framework :: Django :: 5.2',
+    'Framework :: Django :: 6.0',
     'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
     'Programming Language :: Python :: 3.11',
@@ -39,7 +40,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = ">=3.9.2,<3.15"
-Django = ">=2.2,<6"
+Django = ">=2.2,<6.1"
 azure-identity = ">=1.15,<2"
 azure-communication-email = "^1.0"
 
