@@ -2,8 +2,8 @@
 
 [![Unit tests](https://github.com/rebotics/django-azure-communication-email/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/rebotics/django-azure-communication-email/actions/workflows/ci.yml)
 [![PyPI version](https://badge.fury.io/py/django-azure-communication-email.svg)](https://badge.fury.io/py/django-azure-communication-email)
-[![Python](https://img.shields.io/badge/python-3.9+-blue.svg)](https://img.shields.io/badge/python-3.9+-blue)
-[![Django](https://img.shields.io/badge/django-2.2+-blue.svg)](https://img.shields.io/badge/django-2.2+-blue)
+[![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://img.shields.io/badge/python-3.10+-blue)
+[![Django](https://img.shields.io/badge/django-3.2+-blue.svg)](https://img.shields.io/badge/django-3.2+-blue)
 
 A Django email backend for Azure Communication Email service.
 
