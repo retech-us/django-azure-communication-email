@@ -3,7 +3,7 @@
 [![Unit tests](https://github.com/rebotics/django-azure-communication-email/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/rebotics/django-azure-communication-email/actions/workflows/ci.yml)
 [![PyPI version](https://badge.fury.io/py/django-azure-communication-email.svg)](https://badge.fury.io/py/django-azure-communication-email)
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://img.shields.io/badge/python-3.10+-blue)
-[![Django](https://img.shields.io/badge/django-3.2+-blue.svg)](https://img.shields.io/badge/django-3.2+-blue)
+[![Django](https://img.shields.io/badge/django-3.2+-6.1-blue.svg)](https://img.shields.io/badge/django-3.2+-6.1-blue)
 
 A Django email backend for Azure Communication Email service.
 
@@ -34,6 +34,76 @@ following `settings.py` instead:
 
 Now, when you use `django.core.mail.send_mail`, Azure Communication Email
 service will send the messages by default.
+
+## Configuring with MAILERS (Django 6.1+)
+
+Django 6.1 introduced the [`MAILERS`](https://docs.djangoproject.com/en/6.1/ref/settings/#std-setting-MAILERS)
+setting as the replacement for `EMAIL_BACKEND`. The legacy `EMAIL_BACKEND`
+approach above still works, but projects on Django 6.1+ should migrate to
+`MAILERS` before Django 7.0 removes the old settings.
+
+Connection string example:
+
+```python
+MAILERS = {
+    "default": {
+        "BACKEND": "django_azure_communication_email.EmailBackend",
+        "OPTIONS": {
+            "connection_string": "...",
+        },
+    },
+}
+```
+
+Key credential example:
+
+```python
+MAILERS = {
+    "default": {
+        "BACKEND": "django_azure_communication_email.EmailBackend",
+        "OPTIONS": {
+            "endpoint": "...",
+            "key_credential": "...",
+        },
+    },
+}
+```
+
+Azure Active Directory example:
+
+```python
+MAILERS = {
+    "default": {
+        "BACKEND": "django_azure_communication_email.EmailBackend",
+        "OPTIONS": {
+            "endpoint": "...",
+            # DefaultAzureCredential reads AZURE_TENANT_ID, AZURE_CLIENT_ID,
+            # and AZURE_CLIENT_SECRET from the environment.
+        },
+    },
+}
+```
+
+You can define multiple mailers with different configurations (for example,
+separate transactional and marketing backends).
+
+### OPTIONS reference
+
+Each key in a mailer's `OPTIONS` dict maps to a constructor argument on
+`EmailBackend`. Values in `OPTIONS` take precedence over the equivalent
+project-level `AZURE_*` setting.
+
+| OPTIONS key | Equivalent setting |
+|---|---|
+| `connection_string` | `AZURE_COMMUNICATION_CONNECTION_STRING` |
+| `tenant_id` | `AZURE_TENANT_ID` |
+| `client_id` | `AZURE_CLIENT_ID` |
+| `client_secret` | `AZURE_CLIENT_SECRET` |
+| `endpoint` | `AZURE_COMMUNICATION_ENDPOINT` |
+| `key_credential` | `AZURE_KEY_CREDENTIAL` |
+| `retry_policy` | `AZURE_COMMUNICATION_RETRY_POLICY` |
+| `tracking_disabled` | `AZURE_COMMUNICATION_TRACKING_DISABLED` |
+| `fail_silently` | (no setting equivalent; controls error handling) |
 
 ## Configuring Retry Policy
 
