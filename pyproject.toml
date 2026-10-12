@@ -31,6 +31,7 @@ classifiers = [
     'Programming Language :: Python :: 3.12',
     'Programming Language :: Python :: 3.13',
     'Programming Language :: Python :: 3.14',
+    'Programming Language :: Python :: 3.15',
 ]
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/retech-us/django-azure-communication-email/issues"
@@ -38,7 +39,7 @@ classifiers = [
 
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.15"
+python = ">=3.10,<3.16"
 Django = ">=3.2,<7"
 azure-identity = ">=1.15,<2"
 azure-communication-email = "^1.0"
