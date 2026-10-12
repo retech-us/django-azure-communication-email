@@ -27,10 +27,16 @@ class ACEmailBackend(BaseEmailBackend):
         endpoint: Optional[str] = None,
         key_credential: Optional[str] = None,
         retry_policy: Optional[RetryPolicy] = None,
+        tracking_disabled: bool = False,
         fail_silently=False,
         **kwargs,
     ) -> None:
-        super().__init__(fail_silently=fail_silently, **kwargs)
+        alias = kwargs.pop('alias', None)
+        if alias is not None:
+            super().__init__(alias=alias)
+        else:
+            super().__init__(fail_silently=fail_silently)
+        self.fail_silently = fail_silently
 
         self._connection_string = connection_string \
             or settings.CONNECTION_STRING
@@ -40,6 +46,7 @@ class ACEmailBackend(BaseEmailBackend):
         self._endpoint = endpoint or settings.ENDPOINT
         self._key_credential = key_credential or settings.KEY_CREDENTIAL
         self._retry_policy = retry_policy or settings.RETRY_POLICY
+        self._tracking_disabled = tracking_disabled or settings.TRACKING_DISABLED
 
         self._client: EmailClient | None = None
 
@@ -136,7 +143,7 @@ class ACEmailBackend(BaseEmailBackend):
             msg['headers'] = message.extra_headers
         if message.reply_to:
             msg['replyTo'] = self._build_recipients(message.reply_to)
-        if settings.TRACKING_DISABLED:
+        if self._tracking_disabled:
             msg['userEngagementTrackingDisabled'] = True
 
         return msg
